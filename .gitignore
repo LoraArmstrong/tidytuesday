@@ -1,0 +1,10 @@
+# General Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# R
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
