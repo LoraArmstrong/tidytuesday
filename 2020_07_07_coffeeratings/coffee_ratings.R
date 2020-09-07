@@ -55,15 +55,15 @@ var_country <- coffee_ratings %>%
   summarize(count=n(), mean_score = mean(total_cup_points)) %>%
   arrange(desc(mean_score), .by_group=TRUE)
 
-# First make plot for one type
+# Plot for Bourbon variety
 ab <- var %>%
   filter(variety == 'Bourbon')
 
-ab_country <- var_country %>%
-  filter(variety == 'Bourbon')
+#ab_country <- var_country %>%
+#  filter(variety == 'Bourbon')
 
 
-ggplot(data = ab) +
+p <- ggplot(data = ab) +
   geom_point(aes(y=country_of_origin, 
                  x=total_cup_points, 
                  color=country_of_origin)) +
@@ -73,25 +73,13 @@ ggplot(data = ab) +
                alpha=0.5) +
   theme_minimal(base_size = 14) +
   theme(legend.position = 'none',
-        axis.title.y = element_blank()) +
+        axis.title.y = element_blank(),
+        panel.background = element_rect(colour = "grey", size=1, fill=NA)) +
+  xlim(65, 95) +
   labs(x='Rating out of 100',
        title = 'Arabica Coffee Ratings (var. Bourbon) by country of origin')
 
-# # Facet plots for all types
-# ggplot(data = var) +
-#   geom_point(aes(y=country_of_origin, 
-#                  x=total_cup_points, 
-#                  color=country_of_origin)) +
-#   geom_boxplot(aes(y=country_of_origin, 
-#                    x=total_cup_points, 
-#                    fill = country_of_origin),
-#                alpha=0.5) +
-#   theme_minimal(base_size = 14) +
-#   theme(legend.position = 'none',
-#         axis.title.y = element_blank()) +
-#   facet_grid(variety ~ .)
-#   labs(x='Rating out of 100',
-#        title = 'Coffee Ratings by country of origin')
+show(p)
 
 ## COLUMNS, CATEGORIZED ##
 
